@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Final Carousel – Fully Working</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 20px 0;
+        font-family: 'Poppins', sans-serif;
+        background: #f5f5f5;
+    }
+
+    .carousel {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin: auto;
+        background: linear-gradient(135deg, #8fd3fe, #1e5799);
+        border-radius: 18px;
+        overflow: hidden;
+        padding-bottom: 90px;
+    }
+
+    .slides {
+        display: flex;
+        width: 400%;
+        transition: 0.5s ease;
+    }
+
+    .slide {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .text-box {
+        background: #ffffff;
+        width: 90%;
+        padding: 15px 20px;
+        border-radius: 14px;
+        text-align: center;
+        margin: 20px auto 10px auto;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .headline {
+        background: #0CC46C;
+        padding: 10px 22px;
+        border-radius: 40px;
+        font-size: 22px;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .sub-text {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .urgency-text {
+        font-size: 13px;
+        font-weight: 500;
+        color: #444;
+        margin: 8px 0 12px 0;
+        line-height: 1.4;
+    }
+
+    .student-img,
+    .logo-img {
+        width: 260px;
+        margin-top: 5px;
+        animation: float 2.2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+        100% { transform: translateY(0); }
+    }
+
+    .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 14px;
+    }
+
+    .benefit-pill {
+        background: #fff;
+        color: #000;
+        padding: 10px;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 14px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        border: 1px solid #e6e6e6;
+        width: 90%;
+        margin: auto;
+    }
+
+    .slide:nth-child(3) .headline {
+        font-size: 18px !important;
+    }
+
+    .slide:nth-child(3) .benefit-pill {
+        font-size: 12px !important;
+        padding: 8px !important;
+    }
+
+    .slide:nth-child(3) .text-box {
+        padding: 12px 16px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .cta-btn {
+        margin-top: 10px;
+        background: #0CC46C;
+        color: #fff;
+        padding: 12px 22px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .cta-btn:hover { background: #ff2e2e; }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #fff;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+        z-index: 20;
+    }
+
+    .arrow-left { left: 12px; }
+    .arrow-right { right: 12px; }
+
+    /* Flashing Counter Badge */
+    #student-counter {
+        position: absolute;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.85);
+        color: #fff;
+        padding: 6px 18px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 8px;
+        z-index: 50;
+        white-space: nowrap;
+        text-align: center;
+        animation: flash 1.2s infinite ease-in-out;
+    }
+
+    @keyframes flash {
+        0% { opacity: 1; transform: translateX(-50%) scale(1); }
+        50% { opacity: 0.4; transform: translateX(-50%) scale(1.15); }
+        100% { opacity: 1; transform: translateX(-50%) scale(1); }
+    }
+
+    .pagination {
+        position: absolute;
+        bottom: 10px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        background: rgba(255,255,255,0.5);
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 4px;
+    }
+
+    .dot.active { background: #fff; }
+</style>
+</head>
+
+<body>
+
+<div class="carousel">
+
+    <div id="student-counter"></div>
+
+    <button class="arrow arrow-left" onclick="prevSlide()">❮</button>
+    <button class="arrow arrow-right" onclick="nextSlide()">❯</button>
+
+    <div class="slides" id="slider">
+
+        <!-- SLIDE 1 -->
+        <div class="slide">
+            <div class="text-box">
+                <div class="headline">😡 Still not clearing Govt Exams?</div>
+                <div class="sub-text">Feeling frustrated? We know how depressing it gets when you keep missing govt exams by just a few marks. Let’s change that together!</div>
+            </div>
+            <img class="student-img" src="https://cdn.testbook.com/1765100381418-234-removebg-preview.png/1765100384.png" alt="Frustrated Student">
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <div class="text-box">
+                <div class="headline">😊 You're on the right platform — <b>Testbook</b></div>
+                <div class="sub-text">We guide students step-by-step to crack any government exam — smarter, faster, and with confidence!</div>
+            </div>
+            <img class="logo-img" src="https://cdn.testbook.com/1765100381417-345-removebg-preview.png/1765100384.png" alt="Testbook Logo">
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="text-box">
+                <div class="headline">🎯 Get EVERYTHING at just ₹1!</div>
+
+                <div class="benefit-grid">
+                    <div class="benefit-pill">50+ Live Classes</div>
+                    <div class="benefit-pill">Test Series & Quizzes</div>
+                    <div class="benefit-pill">375+ Exams Covered</div>
+                    <div class="benefit-pill">Previous Papers</div>
+                    <div class="benefit-pill">24000+ Study Notes</div>
+                    <div class="benefit-pill">Top Educators</div>
+                    <div class="benefit-pill">Practice Questions</div>
+                    <div class="benefit-pill">24×7 AI Doubt Solver</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="text-box">
+                <div class="headline">🔥 Why pay thousands elsewhere?</div>
+
+                <div class="sub-text">
+                    Stop overpaying for coaching! Get EVERYTHING you need to crack exams here for only ₹1.
+                </div>
+
+                <div class="urgency-text">
+                    ⚠️ Only few seats left — once they’re full, this offer disappears forever! <br>
+                    Students who joined yesterday are already solving mocks & watching top faculty classes.
+                </div>
+
+                <a class="cta-btn" href="https://testbk.co/1h85x" target="_blank">
+                    Start Preparation Now @Rs.1 🚀
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="pagination">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+</div>
+
+<script>
+let currentSlide = 0;
+
+let count = Math.floor(Math.random() * 300) + 200;
+document.getElementById("student-counter").innerText =
+    count + "+ students already enrolled";
+
+function showSlide(n) {
+    const total = 4;
+    if (n >= total) n = 0;
+    if (n < 0) n = total - 1;
+
+    currentSlide = n;
+    document.getElementById("slider").style.marginLeft = `-${n * 100}%`;
+
+    document.querySelectorAll(".dot").forEach((dot, i) =>
+        dot.classList.toggle("active", i === n)
+    );
+}
+
+function nextSlide() { showSlide(currentSlide + 1); }
+function prevSlide() { showSlide(currentSlide - 1); }
+</script>
+
+</body>
+</html>
