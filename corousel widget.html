@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Final Carousel – Fully Working</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Light Carousel – GitHub Optimized</title>
 
 <style>
     body {
         margin: 0;
         padding: 20px 0;
-        font-family: 'Poppins', sans-serif;
+        font-family: Arial, sans-serif;
         background: #f5f5f5;
     }
 
@@ -20,182 +18,127 @@
         max-width: 900px;
         margin: auto;
         background: linear-gradient(135deg, #8fd3fe, #1e5799);
-        border-radius: 18px;
+        border-radius: 16px;
         overflow: hidden;
-        padding-bottom: 90px;
+        padding-bottom: 80px;
     }
 
     .slides {
         display: flex;
         width: 400%;
-        transition: 0.5s ease;
+        transition: 0.4s ease;
     }
 
     .slide {
         width: 25%;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         align-items: center;
-        padding: 0;
-        margin: 0;
     }
 
     .text-box {
         background: #ffffff;
         width: 90%;
-        padding: 15px 20px;
-        border-radius: 14px;
+        padding: 14px 18px;
+        border-radius: 12px;
         text-align: center;
-        margin: 20px auto 10px auto;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        margin: 18px auto 8px auto;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
 
     .headline {
         background: #0CC46C;
-        padding: 10px 22px;
-        border-radius: 40px;
-        font-size: 22px;
-        font-weight: 800;
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-size: 20px;
+        font-weight: bold;
         color: #fff;
-        margin-bottom: 10px;
         display: inline-block;
+        margin-bottom: 8px;
     }
 
-    .sub-text {
-        font-size: 17px;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
+    .sub-text { font-size: 15px; font-weight: bold; }
+    .urgency-text { font-size: 12px; margin-top: 8px; }
 
-    .urgency-text {
-        font-size: 13px;
-        font-weight: 500;
-        color: #444;
-        margin: 8px 0 12px 0;
-        line-height: 1.4;
-    }
-
-    .student-img,
-    .logo-img {
-        width: 260px;
+    img {
+        width: 240px;
         margin-top: 5px;
-        animation: float 2.2s infinite ease-in-out;
-    }
-
-    @keyframes float {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-6px); }
-        100% { transform: translateY(0); }
     }
 
     .benefit-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px 14px;
+        gap: 8px;
+        margin-top: 10px;
     }
 
     .benefit-pill {
         background: #fff;
-        color: #000;
-        padding: 10px;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 14px;
+        padding: 8px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
         text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-        border: 1px solid #e6e6e6;
-        width: 90%;
-        margin: auto;
-    }
-
-    .slide:nth-child(3) .headline {
-        font-size: 18px !important;
-    }
-
-    .slide:nth-child(3) .benefit-pill {
-        font-size: 12px !important;
-        padding: 8px !important;
-    }
-
-    .slide:nth-child(3) .text-box {
-        padding: 12px 16px !important;
-        margin-bottom: 0px !important;
+        border: 1px solid #ddd;
     }
 
     .cta-btn {
-        margin-top: 10px;
+        display: inline-block;
+        margin-top: 12px;
         background: #0CC46C;
         color: #fff;
-        padding: 12px 22px;
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: 700;
+        padding: 10px 18px;
+        border-radius: 6px;
         text-decoration: none;
-        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
     }
-
-    .cta-btn:hover { background: #ff2e2e; }
 
     .arrow {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 44px;
-        height: 44px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
         background: #fff;
         border: none;
         cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+        font-size: 18px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
         z-index: 20;
     }
 
-    .arrow-left { left: 12px; }
-    .arrow-right { right: 12px; }
+    .arrow-left { left: 10px; }
+    .arrow-right { right: 10px; }
 
-    /* Flashing Counter Badge */
     #student-counter {
         position: absolute;
-        bottom: 48px;
+        bottom: 40px;
         left: 50%;
         transform: translateX(-50%);
         background: rgba(0,0,0,0.85);
         color: #fff;
-        padding: 6px 18px;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 8px;
-        z-index: 50;
-        white-space: nowrap;
-        text-align: center;
-        animation: flash 1.2s infinite ease-in-out;
-    }
-
-    @keyframes flash {
-        0% { opacity: 1; transform: translateX(-50%) scale(1); }
-        50% { opacity: 0.4; transform: translateX(-50%) scale(1.15); }
-        100% { opacity: 1; transform: translateX(-50%) scale(1); }
+        padding: 5px 14px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: bold;
     }
 
     .pagination {
         position: absolute;
         bottom: 10px;
-        text-align: center;
         width: 100%;
+        text-align: center;
     }
 
     .dot {
-        width: 10px;
-        height: 10px;
-        background: rgba(255,255,255,0.5);
+        width: 8px;
+        height: 8px;
+        background: rgba(255,255,255,0.6);
         border-radius: 50%;
         display: inline-block;
-        margin: 0 4px;
+        margin: 0 3px;
     }
 
     .dot.active { background: #fff; }
@@ -217,34 +160,34 @@
         <div class="slide">
             <div class="text-box">
                 <div class="headline">😡 Still not clearing Govt Exams?</div>
-                <div class="sub-text">Feeling frustrated? We know how depressing it gets when you keep missing govt exams by just a few marks. Let’s change that together!</div>
+                <div class="sub-text">We know how depressing it gets when you keep missing by a few marks. Let’s fix that!</div>
             </div>
-            <img class="student-img" src="https://cdn.testbook.com/1765100381418-234-removebg-preview.png" alt="Frustrated Student">
+            <img src="https://cdn.testbook.com/1765100381418-234-removebg-preview.png" alt="Frustrated Student">
         </div>
 
         <!-- SLIDE 2 -->
         <div class="slide">
             <div class="text-box">
-                <div class="headline">😊 You're on the right platform — <b>Testbook</b></div>
-                <div class="sub-text">We guide students step-by-step to crack any government exam — smarter, faster, and with confidence!</div>
+                <div class="headline">😊 You're on the right platform — Testbook</div>
+                <div class="sub-text">We guide students step-by-step to crack any government exam!</div>
             </div>
-            <img class="logo-img" src="https://cdn.testbook.com/1765100381417-345-removebg-preview.png" alt="Testbook Logo">
+            <img src="https://cdn.testbook.com/1765100381417-345-removebg-preview.png" alt="Testbook Logo">
         </div>
 
         <!-- SLIDE 3 -->
         <div class="slide">
             <div class="text-box">
-                <div class="headline">🎯 Get EVERYTHING at just ₹1!</div>
+                <div class="headline">🎯 Everything for just ₹1!</div>
 
                 <div class="benefit-grid">
-                    <div class="benefit-pill">50+ Live Classes</div>
-                    <div class="benefit-pill">Test Series & Quizzes</div>
-                    <div class="benefit-pill">375+ Exams Covered</div>
-                    <div class="benefit-pill">Previous Papers</div>
-                    <div class="benefit-pill">24000+ Study Notes</div>
-                    <div class="benefit-pill">Top Educators</div>
-                    <div class="benefit-pill">Practice Questions</div>
-                    <div class="benefit-pill">24×7 AI Doubt Solver</div>
+                    <div class="benefit-pill">Live Classes</div>
+                    <div class="benefit-pill">Mock Tests</div>
+                    <div class="benefit-pill">375 Exams</div>
+                    <div class="benefit-pill">PYQs</div>
+                    <div class="benefit-pill">Notes</div>
+                    <div class="benefit-pill">Top Teachers</div>
+                    <div class="benefit-pill">Practice</div>
+                    <div class="benefit-pill">AI Doubt Solver</div>
                 </div>
             </div>
         </div>
@@ -252,20 +195,13 @@
         <!-- SLIDE 4 -->
         <div class="slide">
             <div class="text-box">
-                <div class="headline">🔥 Why pay thousands elsewhere?</div>
+                <div class="headline">🔥 Why pay thousands?</div>
 
-                <div class="sub-text">
-                    Stop overpaying for coaching! Get EVERYTHING you need to crack exams here for only ₹1.
-                </div>
+                <div class="sub-text">Get EVERYTHING for only ₹1 — limited seats!</div>
 
-                <div class="urgency-text">
-                    ⚠️ Only few seats left — once they’re full, this offer disappears forever! <br>
-                    Students who joined yesterday are already solving mocks & watching top faculty classes.
-                </div>
+                <div class="urgency-text">Students who joined yesterday are already solving mocks & watching classes.</div>
 
-                <a class="cta-btn" href="https://testbk.co/1h85x" target="_blank">
-                    Start Preparation Now @Rs.1 🚀
-                </a>
+                <a class="cta-btn" href="https://testbk.co/1h85x" target="_blank">Start Now 🚀</a>
             </div>
         </div>
 
@@ -283,9 +219,8 @@
 <script>
 let currentSlide = 0;
 
-let count = Math.floor(Math.random() * 300) + 200;
 document.getElementById("student-counter").innerText =
-    count + "+ students already enrolled";
+    (Math.floor(Math.random() * 300) + 200) + "+ students enrolled";
 
 function showSlide(n) {
     const total = 4;
